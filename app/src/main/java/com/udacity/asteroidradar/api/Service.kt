@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 enum class NasaNeowsApiStatus { LOADING, ERROR, DONE }
 
@@ -36,8 +37,10 @@ private val retrofit = Retrofit.Builder()
  * A retrofit service to fetch a list of asteroids.
  */
 interface NasaNeowsApiService {
-    @GET("neo/rest/v1/feed?api_key=DEMO_KEY")
-    suspend fun getAsteroids(): String
+    @GET("neo/rest/v1/feed")
+    suspend fun getAsteroids(
+        @Query("api_key") apiKey: String = Constants.NASA_GOV_API_KEY
+    ): String
 }
 
 object NasaNeowsApi {
