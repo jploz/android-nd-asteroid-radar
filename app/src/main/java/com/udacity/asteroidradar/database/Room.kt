@@ -7,23 +7,29 @@ import androidx.room.RoomDatabase
 import com.udacity.asteroidradar.Constants
 
 
-@Database(entities = [DatabaseAsteroid::class], version = 1, exportSchema = false)
-abstract class AsteroidsDatabase : RoomDatabase() {
+@Database(
+    entities = [DatabaseAsteroid::class, DatabasePictureOfDay::class],
+    version = 1,
+    exportSchema = false
+)
+abstract class AsteroidRadarDatabase : RoomDatabase() {
     abstract val asteroidDao: AsteroidDao
 
     companion object {
 
         @Volatile
-        private lateinit var INSTANCE: AsteroidsDatabase
+        private lateinit var INSTANCE: AsteroidRadarDatabase
 
-        fun getDatabase(context: Context): AsteroidsDatabase {
-            synchronized(AsteroidsDatabase::class.java) {
+        fun getDatabase(context: Context): AsteroidRadarDatabase {
+            synchronized(AsteroidRadarDatabase::class.java) {
                 if (!::INSTANCE.isInitialized) {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
-                        AsteroidsDatabase::class.java,
+                        AsteroidRadarDatabase::class.java,
                         Constants.DATABASE_NAME
-                    ).build()
+                    )
+                        .fallbackToDestructiveMigration()
+                        .build()
                 }
             }
             return INSTANCE

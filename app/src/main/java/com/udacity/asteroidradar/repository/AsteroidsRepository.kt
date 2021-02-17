@@ -7,14 +7,14 @@ import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.api.NasaNeowsApi
 import com.udacity.asteroidradar.api.asDatabaseModel
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
-import com.udacity.asteroidradar.database.AsteroidsDatabase
+import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.database.asDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class AsteroidsRepository(
-    private val database: AsteroidsDatabase,
+    private val database: AsteroidRadarDatabase,
     private val networkApi: NasaNeowsApi
 ) {
 

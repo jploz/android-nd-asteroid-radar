@@ -1,6 +1,9 @@
 package com.udacity.asteroidradar.api
 
+import com.squareup.moshi.Json
 import com.udacity.asteroidradar.database.DatabaseAsteroid
+import com.udacity.asteroidradar.database.DatabasePictureOfDay
+
 
 /**
  * This file contains DataTransferObjects, which are responsible for parsing responses
@@ -32,4 +35,18 @@ fun List<NetworkAsteroid>.asDatabaseModel(): Array<DatabaseAsteroid> {
             isPotentiallyHazardous = it.isPotentiallyHazardous
         )
     }.toTypedArray()
+}
+
+data class NetworkPictureOfDay(
+    val url: String,
+    val title: String,
+    @Json(name = "media_type") val mediaType: String
+)
+
+fun NetworkPictureOfDay.asDatabaseModel(): DatabasePictureOfDay {
+    return DatabasePictureOfDay(
+        url = url,
+        title = title,
+        mediaType = mediaType
+    )
 }

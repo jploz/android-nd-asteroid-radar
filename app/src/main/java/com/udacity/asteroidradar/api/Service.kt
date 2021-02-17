@@ -34,13 +34,18 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 /**
- * A retrofit service to fetch a list of asteroids.
+ * A retrofit service to fetch data from NASA web service APIs
  */
 interface NasaNeowsApiService {
     @GET("neo/rest/v1/feed")
     suspend fun getAsteroids(
         @Query("api_key") apiKey: String = Constants.NASA_GOV_API_KEY
     ): String
+
+    @GET("planetary/apod")
+    suspend fun getPictureOfTheDay(
+        @Query("api_key") apiKey: String = Constants.NASA_GOV_API_KEY
+    ): NetworkPictureOfDay
 }
 
 object NasaNeowsApi {

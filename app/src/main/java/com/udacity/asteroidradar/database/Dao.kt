@@ -18,7 +18,7 @@ interface AsteroidDao {
 
 @Dao
 interface PictureOfDayDao {
-    @Query("SELECT * FROM pictureOfDay")
+    @Query("SELECT * FROM databasepictureofday")
     fun getPictureOfDay(): LiveData<DatabasePictureOfDay>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

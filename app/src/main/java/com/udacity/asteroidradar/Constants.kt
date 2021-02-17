@@ -6,5 +6,5 @@ object Constants {
     const val BASE_URL = "https://api.nasa.gov/"
     const val NASA_GOV_API_KEY = BuildConfig.NASA_GOV_API_KEY
 
-    const val DATABASE_NAME = "asteroids"
+    const val DATABASE_NAME = "AsteroidRadar"
 }
