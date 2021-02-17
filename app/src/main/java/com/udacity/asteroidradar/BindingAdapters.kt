@@ -4,7 +4,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.udacity.asteroidradar.main.AsteroidListAdapter
+import com.udacity.asteroidradar.domain.Asteroid
+import com.udacity.asteroidradar.ui.main.AsteroidListAdapter
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {

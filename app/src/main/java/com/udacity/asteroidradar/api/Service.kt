@@ -49,5 +49,5 @@ interface NasaNeowsApiService {
 }
 
 object NasaNeowsApi {
-    val service = retrofit.create(NasaNeowsApiService::class.java)
+    val service: NasaNeowsApiService = retrofit.create(NasaNeowsApiService::class.java)
 }

@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar.main
+package com.udacity.asteroidradar.ui.main
 
 import android.app.Application
 import android.util.Log
@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.api.NasaNeowsApi
 import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.repository.AsteroidsRepository
@@ -47,7 +47,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             try {
                 asteroidsRepository.refreshAsteroids()
             } catch (e: Exception) {
-                Log.e("MainViewModel", "${e}")
+                Log.e("MainViewModel", "$e")
             }
         }
     }
