@@ -30,8 +30,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         val database = AsteroidRadarDatabase.getDatabase(application)
 
-        asteroidsRepository = AsteroidsRepository(database, NasaApi)
-
+        asteroidsRepository = AsteroidsRepository(
+            database.asteroidDao,
+            NasaApi.service
+        )
         pictureOfDayRepository = PictureOfDayRepository(
             database.pictureOfDayDao,
             NasaApi.service
