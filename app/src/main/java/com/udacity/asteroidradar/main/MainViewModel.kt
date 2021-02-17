@@ -3,41 +3,40 @@ package com.udacity.asteroidradar.main
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.api.NasaNeowsApi
-import com.udacity.asteroidradar.database.AsteroidsDatabase
+import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.repository.AsteroidsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    /**
-     * Factory for constructing MainViewModel with parameter
-     */
-    class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return MainViewModel(app) as T
-            }
-            throw IllegalArgumentException("Unable to construct view model")
-        }
-    }
-
-    private val database = AsteroidsDatabase.getDatabase(application)
+    private val database = AsteroidRadarDatabase.getDatabase(application)
     private val networkApi = NasaNeowsApi
     private val asteroidsRepository = AsteroidsRepository(database, networkApi)
 
     val asteroids = asteroidsRepository.asteroids
+
+    private val _navigateToSelectedAsteroid = MutableLiveData<Asteroid?>()
+    val navigateToSelectedAsteroid: LiveData<Asteroid?> = _navigateToSelectedAsteroid
 
     /**
      * Call refreshAsteroids() on init so we can display status immediately.
      */
     init {
         refreshAsteroids()
+    }
+
+    fun navigateToAsteroidDetails(asteroid: Asteroid) {
+        _navigateToSelectedAsteroid.value = asteroid
+    }
+
+    fun doneNavigateToAsteroidDetails() {
+        _navigateToSelectedAsteroid.value = null
     }
 
     /**

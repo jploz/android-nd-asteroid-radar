@@ -15,3 +15,12 @@ interface AsteroidDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg videos: DatabaseAsteroid)
 }
+
+@Dao
+interface PictureOfDayDao {
+    @Query("SELECT * FROM pictureOfDay")
+    fun getPictureOfDay(): LiveData<DatabasePictureOfDay>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPictureOfDay(pictureOfDay: DatabasePictureOfDay)
+}

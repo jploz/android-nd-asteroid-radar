@@ -14,24 +14,44 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/list_item_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        tools:background="@color/app_background">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/codename_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             android:text="@{asteroid.codename}"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorAccent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:textColor="@color/default_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Codename" />
+
+        <TextView
+            android:id="@+id/close_approach_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{asteroid.closeApproachDate}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/text_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/codename_text"
+            tools:text="2020-12-02" />
+
+        <ImageView
+            android:id="@+id/potentially_hazardous_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/codename_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:statusIcon="@{asteroid.potentiallyHazardous}"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_status_potentially_hazardous" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
