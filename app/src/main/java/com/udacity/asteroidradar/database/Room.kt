@@ -13,7 +13,9 @@ import com.udacity.asteroidradar.Constants
     exportSchema = false
 )
 abstract class AsteroidRadarDatabase : RoomDatabase() {
+
     abstract val asteroidDao: AsteroidDao
+    abstract val pictureOfDayDao: PictureOfDayDao
 
     companion object {
 
