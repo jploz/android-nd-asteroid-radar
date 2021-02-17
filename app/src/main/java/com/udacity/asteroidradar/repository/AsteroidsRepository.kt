@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.udacity.asteroidradar.domain.Asteroid
-import com.udacity.asteroidradar.api.NasaNeowsApi
+import com.udacity.asteroidradar.api.NasaApi
 import com.udacity.asteroidradar.api.asDatabaseModel
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.AsteroidRadarDatabase
@@ -15,7 +15,7 @@ import org.json.JSONObject
 
 class AsteroidsRepository(
     private val database: AsteroidRadarDatabase,
-    private val networkApi: NasaNeowsApi
+    private val networkApi: NasaApi
 ) {
 
     /**

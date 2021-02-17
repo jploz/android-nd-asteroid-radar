@@ -11,7 +11,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-enum class NasaNeowsApiStatus { LOADING, ERROR, DONE }
+enum class NasaApiStatus { LOADING, ERROR, DONE }
 
 // setup network logging
 val interceptor = run {
@@ -36,18 +36,18 @@ private val retrofit = Retrofit.Builder()
 /**
  * A retrofit service to fetch data from NASA web service APIs
  */
-interface NasaNeowsApiService {
+interface NasaApiService {
     @GET("neo/rest/v1/feed")
     suspend fun getAsteroids(
-        @Query("api_key") apiKey: String = Constants.NASA_GOV_API_KEY
+        @Query("api_key") apiKey: String = Constants.NASA_API_KEY
     ): String
 
     @GET("planetary/apod")
     suspend fun getPictureOfTheDay(
-        @Query("api_key") apiKey: String = Constants.NASA_GOV_API_KEY
+        @Query("api_key") apiKey: String = Constants.NASA_API_KEY
     ): NetworkPictureOfDay
 }
 
-object NasaNeowsApi {
-    val service: NasaNeowsApiService = retrofit.create(NasaNeowsApiService::class.java)
+object NasaApi {
+    val service: NasaApiService = retrofit.create(NasaApiService::class.java)
 }

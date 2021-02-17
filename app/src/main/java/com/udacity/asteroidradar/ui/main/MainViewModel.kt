@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.domain.Asteroid
-import com.udacity.asteroidradar.api.NasaNeowsApi
+import com.udacity.asteroidradar.api.NasaApi
 import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.repository.AsteroidsRepository
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = AsteroidRadarDatabase.getDatabase(application)
-    private val networkApi = NasaNeowsApi
+    private val networkApi = NasaApi
     private val asteroidsRepository = AsteroidsRepository(database, networkApi)
 
     val asteroids = asteroidsRepository.asteroids

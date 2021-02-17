@@ -17,7 +17,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String" , "NASA_GOV_API_KEY" ,  "\"$NASA_GOV_API_KEY\""
+        buildConfigField "String" , "NASA_API_KEY" ,  "\"$NASA_API_KEY\""
     }
     buildTypes {
         release {
