@@ -11,7 +11,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-enum class NasaApiStatus { LOADING, ERROR, DONE }
+//enum class NasaApiStatus { LOADING, ERROR, DONE }
 
 // setup network logging
 val interceptor = run {
