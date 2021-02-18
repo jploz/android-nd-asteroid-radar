@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.api.NasaApi
 import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.domain.Asteroid
+import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.repository.AsteroidsRepository
 import com.udacity.asteroidradar.repository.PictureOfDayRepository
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val pictureOfDayRepository: PictureOfDayRepository
 
     val asteroids: LiveData<List<Asteroid>>
+    val pictureOfTheDay: LiveData<PictureOfDay>
 
     private val _navigateToSelectedAsteroid = MutableLiveData<Asteroid?>()
     val navigateToSelectedAsteroid: LiveData<Asteroid?> = _navigateToSelectedAsteroid
@@ -40,6 +42,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         )
 
         asteroids = asteroidsRepository.asteroids
+        pictureOfTheDay = pictureOfDayRepository.pictureOfDay
 
         refreshAsteroids()
         refreshPictureOfTheDay()
