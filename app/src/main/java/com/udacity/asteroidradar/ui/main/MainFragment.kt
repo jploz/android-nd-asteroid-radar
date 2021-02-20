@@ -24,9 +24,11 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.asteroidRecycler.adapter = AsteroidListAdapter(AsteroidListAdapter.OnClickListener {
+        val asteroidListAdapter = AsteroidListAdapter(AsteroidListAdapter.OnClickListener {
             viewModel.navigateToAsteroidDetails(it)
         })
+        asteroidListAdapter.setHasStableIds(true)
+        binding.asteroidRecycler.adapter = asteroidListAdapter
 
         viewModel.navigateToSelectedAsteroid.observe(viewLifecycleOwner, {
             if (null != it) {
