@@ -98,4 +98,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
+    fun setAsteroidsListUiFilter(filter: AsteroidsUiFilter) {
+        // set value to live data asynchronously
+        asteroidsUiFilter.postValue(filter)
+    }
 }
