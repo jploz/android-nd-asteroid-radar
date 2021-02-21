@@ -2,18 +2,25 @@ package com.udacity.asteroidradar.ui.main
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.udacity.asteroidradar.api.NasaApi
 import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.PictureOfDay
+import com.udacity.asteroidradar.getTodayDateFormatted
 import com.udacity.asteroidradar.repository.AsteroidsRepository
 import com.udacity.asteroidradar.repository.PictureOfDayRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
+/**
+ * Status of selected UI mode: show all, show weekly, show todays
+ */
+enum class AsteroidsUiFilter {
+    SHOW_ASTEROIDS_ALL,
+    SHOW_ASTEROIDS_TODAYS,
+    SHOW_ASTEROIDS_WEEKS
+}
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -22,6 +29,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val asteroids: LiveData<List<Asteroid>>
     val pictureOfTheDay: LiveData<PictureOfDay>
+
+    private val asteroidsUiFilter = MutableLiveData(AsteroidsUiFilter.SHOW_ASTEROIDS_WEEKS)
 
     private val _navigateToSelectedAsteroid = MutableLiveData<Asteroid?>()
     val navigateToSelectedAsteroid: LiveData<Asteroid?> = _navigateToSelectedAsteroid
@@ -41,7 +50,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             NasaApi.service
         )
 
-        asteroids = asteroidsRepository.asteroids
+        asteroids = Transformations.switchMap(asteroidsUiFilter) {
+            when (it!!) {
+                AsteroidsUiFilter.SHOW_ASTEROIDS_ALL -> asteroidsRepository.getAsteroidsAll()
+                AsteroidsUiFilter.SHOW_ASTEROIDS_TODAYS -> asteroidsRepository.getAsteroidsToday(
+                    getTodayDateFormatted()
+                )
+                AsteroidsUiFilter.SHOW_ASTEROIDS_WEEKS -> asteroidsRepository.getAsteroidsNextWeek(
+                    getTodayDateFormatted()
+                )
+            }
+        }
+
         pictureOfTheDay = pictureOfDayRepository.pictureOfDay
 
         refreshAsteroids()
