@@ -28,7 +28,14 @@ class PictureOfDayRepository(
         withContext(Dispatchers.IO) {
             try {
                 val networkPictureOfDay = nasaService.getPictureOfTheDay()
-                dao.insertPictureOfDay(networkPictureOfDay.asDatabaseModel())
+                if (networkPictureOfDay.mediaType == "image") {
+                    dao.insertPictureOfDay(networkPictureOfDay.asDatabaseModel())
+                } else {
+                    Log.i(
+                        "PictureOfDayRepository",
+                        "Picture of day ignored (media type = ${networkPictureOfDay.mediaType})"
+                    )
+                }
             } catch (e: Exception) {
                 Log.e("PictureOfDayRepository", e.toString())
                 throw e

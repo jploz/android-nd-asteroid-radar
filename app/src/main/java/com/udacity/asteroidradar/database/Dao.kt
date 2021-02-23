@@ -32,7 +32,12 @@ interface AsteroidDao {
 
 @Dao
 interface PictureOfDayDao {
-    @Query("SELECT * FROM databasepictureofday")
+    @Query(
+        "SELECT * FROM databasepictureofday " +
+                "WHERE mediatype = 'image' " +
+                "ORDER BY date ASC " +
+                "LIMIT 1"
+    )
     fun getPictureOfDay(): LiveData<DatabasePictureOfDay>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
