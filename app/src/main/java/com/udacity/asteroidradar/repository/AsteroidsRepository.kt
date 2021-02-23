@@ -3,13 +3,14 @@ package com.udacity.asteroidradar.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.api.NasaApiService
 import com.udacity.asteroidradar.api.asDatabaseModel
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.AsteroidDao
 import com.udacity.asteroidradar.database.asDomainModel
 import com.udacity.asteroidradar.domain.Asteroid
-import com.udacity.asteroidradar.getNextWeekEndDateFormatted
+import com.udacity.asteroidradar.getOffsetDateFormatted
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -34,7 +35,7 @@ class AsteroidsRepository(
         Transformations.map(
             dao.getAsteroidsByCloseApproachDate(
                 fromDate = fromDate,
-                toDate = getNextWeekEndDateFormatted(fromDate)
+                toDate = getOffsetDateFormatted(fromDate, Constants.DAYS_IN_WEEK)
             )
         ) { it.asDomainModel() }
 

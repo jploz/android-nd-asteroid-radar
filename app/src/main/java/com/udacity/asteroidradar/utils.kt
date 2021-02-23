@@ -11,19 +11,19 @@ fun getTodayDateFormatted(): String {
     return dateFormat.format(calendar.time)
 }
 
-fun getNextWeekEndDateFormatted(today: String): String {
+fun getOffsetDateFormatted(date: String, offsetInDays: Int): String {
     val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
     val calendar = Calendar.getInstance()
-    calendar.time = dateFormat.parse(today)
-    calendar.add(Calendar.DAY_OF_YEAR, 7)
+    calendar.time = dateFormat.parse(date)
+    calendar.add(Calendar.DAY_OF_YEAR, offsetInDays)
     return dateFormat.format(calendar.time)
 }
 
-fun getNextSevenDaysFormattedDates(): ArrayList<String> {
+fun getNextDaysFormattedDates(numberOfDays: Int): ArrayList<String> {
     val formattedDateList = ArrayList<String>()
 
     val calendar = Calendar.getInstance()
-    for (i in 0..Constants.DEFAULT_END_DATE_DAYS) {
+    for (i in 0..numberOfDays) {
         val currentTime = calendar.time
         val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
         formattedDateList.add(dateFormat.format(currentTime))

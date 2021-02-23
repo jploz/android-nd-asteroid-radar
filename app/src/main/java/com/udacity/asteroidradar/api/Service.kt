@@ -44,6 +44,7 @@ interface NasaApiService {
 
     @GET("planetary/apod")
     suspend fun getPictureOfTheDay(
+        @Query("date") date: String,
         @Query("api_key") apiKey: String = Constants.NASA_API_KEY
     ): NetworkPictureOfDay
 }
