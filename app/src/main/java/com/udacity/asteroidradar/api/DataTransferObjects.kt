@@ -40,13 +40,15 @@ fun List<NetworkAsteroid>.asDatabaseModel(): Array<DatabaseAsteroid> {
 data class NetworkPictureOfDay(
     val url: String,
     val title: String,
-    @Json(name = "media_type") val mediaType: String
+    @Json(name = "media_type") val mediaType: String,
+    val date: String,
 )
 
 fun NetworkPictureOfDay.asDatabaseModel(): DatabasePictureOfDay {
     return DatabasePictureOfDay(
         url = url,
         title = title,
-        mediaType = mediaType
+        mediaType = mediaType,
+        date = date
     )
 }

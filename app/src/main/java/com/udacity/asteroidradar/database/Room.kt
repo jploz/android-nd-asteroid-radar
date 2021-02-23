@@ -9,7 +9,7 @@ import com.udacity.asteroidradar.Constants
 
 @Database(
     entities = [DatabaseAsteroid::class, DatabasePictureOfDay::class],
-    version = 1,
+    version = Constants.DATABASE_VERSION,
     exportSchema = false
 )
 abstract class AsteroidRadarDatabase : RoomDatabase() {

@@ -38,7 +38,8 @@ data class DatabasePictureOfDay(
     @PrimaryKey
     val url: String,
     val title: String,
-    val mediaType: String
+    val mediaType: String,
+    val date: String
 )
 
 fun DatabasePictureOfDay.asDomainModel(): PictureOfDay {

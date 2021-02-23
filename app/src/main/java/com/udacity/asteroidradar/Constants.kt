@@ -7,4 +7,5 @@ object Constants {
     const val NASA_API_KEY = BuildConfig.NASA_API_KEY
 
     const val DATABASE_NAME = "AsteroidRadar"
+    const val DATABASE_VERSION = 2
 }
