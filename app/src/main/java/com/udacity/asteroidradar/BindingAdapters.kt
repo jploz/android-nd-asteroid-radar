@@ -70,6 +70,8 @@ fun bindPictureOfDay(imageView: ImageView, pictureOfDay: PictureOfDay?) {
             .load(pictureOfDay.url)
             .placeholder(R.drawable.placeholder_picture_of_day)
             .error(R.drawable.placeholder_picture_of_day)
+            .fit()
+            .centerCrop()
             .into(imageView)
 
         val contentDescription =
