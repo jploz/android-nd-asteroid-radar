@@ -35,7 +35,7 @@ interface PictureOfDayDao {
     @Query(
         "SELECT * FROM databasepictureofday " +
                 "WHERE mediatype = 'image' " +
-                "ORDER BY date ASC " +
+                "ORDER BY date DESC " +
                 "LIMIT 1"
     )
     fun getPictureOfDay(): LiveData<DatabasePictureOfDay>
