@@ -6,6 +6,7 @@ object Constants {
     const val NASA_API_KEY = BuildConfig.NASA_API_KEY
 
     const val DAYS_IN_WEEK = 7
+    const val NEO_FEED_DATE_LIMIT = 7
 
     const val DATABASE_NAME = "AsteroidRadar"
     const val DATABASE_VERSION = 2
