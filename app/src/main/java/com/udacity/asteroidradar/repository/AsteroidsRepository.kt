@@ -11,6 +11,7 @@ import com.udacity.asteroidradar.database.AsteroidDao
 import com.udacity.asteroidradar.database.asDomainModel
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.getOffsetDateFormatted
+import com.udacity.asteroidradar.getTodayDateFormatted
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -56,7 +57,9 @@ class AsteroidsRepository(
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
             try {
-                val asteroidsResponse = nasaService.getAsteroids()
+                val startDate = getTodayDateFormatted()
+                val endDate = getOffsetDateFormatted(startDate, Constants.NEO_FEED_DATE_LIMIT)
+                val asteroidsResponse = nasaService.getAsteroids(startDate, endDate)
                 val networkAsteroids = parseAsteroidsJsonResult(JSONObject(asteroidsResponse))
                 dao.insertAll(*networkAsteroids.asDatabaseModel())
             } catch (e: Exception) {

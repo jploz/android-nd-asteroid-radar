@@ -10,7 +10,7 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): List<NetworkAsteroid> {
 
     val asteroidList = ArrayList<NetworkAsteroid>()
 
-    val nextSevenDaysFormattedDates = getNextDaysFormattedDates(Constants.DAYS_IN_WEEK)
+    val nextSevenDaysFormattedDates = getNextDaysFormattedDates(Constants.NEO_FEED_DATE_LIMIT)
     for (formattedDate in nextSevenDaysFormattedDates) {
         val dateAsteroidJsonArray = nearEarthObjectsJson.getJSONArray(formattedDate)
 
